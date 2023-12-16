@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
+  "pluginAlias": "HomebridgeIndoorAirFile",
   "pluginType": "platform",
   "singular": true,
   "schema": {
