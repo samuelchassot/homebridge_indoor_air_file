@@ -10,6 +10,12 @@
         "type": "string",
         "required": true,
         "default": "Example Dynamic Platform"
+      },
+      "file_path": {
+        "title": "File Path",
+        "type": "string",
+        "required": true,
+        "default": "/tmp/indoor_air.json"
       }
     }
   }
