@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "HomebridgeIndoorAirFile",
+  "pluginAlias": "HomebridgeIndoorAir",
   "pluginType": "platform",
   "singular": true,
   "schema": {
@@ -12,10 +12,10 @@
         "default": "Example Dynamic Platform"
       },
       "file_path": {
-        "title": "File Path",
+        "title": "url",
         "type": "string",
         "required": true,
-        "default": "/tmp/indoor_air.json"
+        "default": "http://localhost:8080/getData"
       }
     }
   }
