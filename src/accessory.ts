@@ -59,8 +59,12 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.co2Service = new hap.Service(hap.Service.CarbonDioxideSensor);
     this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideDetected)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.co2LevelPPM != 0.0 ? "YES": "NO"));
-        callback(undefined, this.co2LevelPPM != 0.0);
+        log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.co2LevelPPM <= 1000 ? "NORMAL": "ABNORMAL"));
+        if (this.co2LevelPPM <= 1000) {
+          callback(undefined, hap.Characteristic.CarbonDioxideDetected.CO2_LEVELS_NORMAL);
+        } else {
+          callback(undefined, hap.Characteristic.CarbonDioxideDetected.CO2_LEVELS_ABNORMAL);
+        }
       })
       this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideLevel)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
