@@ -17,7 +17,7 @@
         "required": true,
         "default": "http://localhost:8080/getData"
       },
-      "pollingInterval": {
+      "pollingIntervalMS": {
         "title": "Polling Interval",
         "type": "number",
         "required": false,
