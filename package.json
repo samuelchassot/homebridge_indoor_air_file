@@ -1,9 +1,9 @@
 {
   "private": true,
-  "displayName": "Indoor Air Information",
+  "displayName": "Indoor Air Sensor",
   "name": "@samuelchassot/homebridge-indoor-air-http",
   "version": "1.0.0",
-  "description": "Shows as indoor air quality sensor in HomeKit, reading values from a json file.",
+  "description": "Shows different values for indoor air: CO2, VOC, Humidity, Temperature, Pressure",
   "main": "dist/accessory.js",
   "scripts": {
     "clean": "rimraf ./dist",
@@ -12,7 +12,7 @@
     "postpublish": "npm run clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Andreas Bauer <mail@anderl-bauer.de>",
+  "author": "Samuel Chassot",
   "engines": {
     "homebridge": ">=1.0.0"
   },

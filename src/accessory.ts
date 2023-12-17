@@ -40,39 +40,40 @@ let hap: HAP;
  */
 export = (api: API) => {
   hap = api.hap;
-  api.registerAccessory("ExampleSwitch", ExampleSwitch);
+  api.registerAccessory("IndoorAirSensor", IndoorAirSensor);
 };
 
-class ExampleSwitch implements AccessoryPlugin {
+class IndoorAirSensor implements AccessoryPlugin {
 
   private readonly log: Logging;
   private readonly name: string;
-  private switchOn = false;
+  private co2LevelPPM = 0.0;
 
-  private readonly switchService: Service;
+  private readonly co2Service: Service;
   private readonly informationService: Service;
 
   constructor(log: Logging, config: AccessoryConfig, api: API) {
     this.log = log;
     this.name = config.name;
 
-    this.switchService = new hap.Service.Switch(this.name);
-    this.switchService.getCharacteristic(hap.Characteristic.On)
+    this.co2Service = new hap.Service(hap.Service.CarbonDioxideSensor);
+    this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideDetected)
       .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
-        log.info("Current state of the switch was returned: " + (this.switchOn? "ON": "OFF"));
-        callback(undefined, this.switchOn);
+        log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.co2LevelPPM != 0.0 ? "YES": "NO"));
+        callback(undefined, this.co2LevelPPM != 0.0);
       })
-      .on(CharacteristicEventTypes.SET, (value: CharacteristicValue, callback: CharacteristicSetCallback) => {
-        this.switchOn = value as boolean;
-        log.info("Switch state was set to: " + (this.switchOn? "ON": "OFF"));
-        callback();
-      });
+      this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideLevel)
+      .on(CharacteristicEventTypes.GET, (callback: CharacteristicGetCallback) => {
+        log.info("Current state of the CO2 sensor CO2Level was returned: " + (this.co2LevelPPM));
+        callback(undefined, this.co2LevelPPM);
+      })
+     
 
     this.informationService = new hap.Service.AccessoryInformation()
       .setCharacteristic(hap.Characteristic.Manufacturer, "Custom Manufacturer")
       .setCharacteristic(hap.Characteristic.Model, "Custom Model");
 
-    log.info("Switch finished initializing!");
+    log.info("IndoorAirSensor finished initializing!");
   }
 
   /*
@@ -90,7 +91,7 @@ class ExampleSwitch implements AccessoryPlugin {
   getServices(): Service[] {
     return [
       this.informationService,
-      this.switchService,
+      this.co2Service,
     ];
   }
 
