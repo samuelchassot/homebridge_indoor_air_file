@@ -91,8 +91,8 @@ class IndoorAirSensor implements AccessoryPlugin {
 
 
 
-    this.log.info("Polling interval is " + config.pollingInterval + " ms");
-    this.pollingInterval = config.pollingInterval;
+      this.pollingInterval = config.pollingIntervalMS;
+    this.log.info("Polling interval is " + this.pollingInterval + " ms");
     this.timer = setTimeout(this.poll.bind(this), this.pollingInterval);
 
     log.info("IndoorAirSensor finished initializing!");
