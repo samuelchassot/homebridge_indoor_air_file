@@ -50,6 +50,7 @@ type SensorData = {
   pressure: number;
   temperature: number;
   tvoc: number;
+  aqi: number;
 };
 class IndoorAirSensor implements AccessoryPlugin {
 
@@ -61,6 +62,7 @@ class IndoorAirSensor implements AccessoryPlugin {
   private timer: NodeJS.Timeout | null = null;
 
   private readonly co2Service: Service;
+  private readonly airQualityService: Service;
   private readonly informationService: Service;
 
   constructor(log: Logging, config: AccessoryConfig, api: API) {
@@ -75,8 +77,10 @@ class IndoorAirSensor implements AccessoryPlugin {
       pressure: 0,
       temperature: 0,
       tvoc: 0,
+      aqi: 0,
     };
 
+    // CO2 Service --------------------------------------------------------------------------------
     this.co2Service = new hap.Service.CarbonDioxideSensor(this.name + " CO2 Sensor");
     this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideDetected)
       .onGet(this.handleCarbonDioxideDetectedGet.bind(this))
@@ -84,6 +88,14 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.co2Service.getCharacteristic(hap.Characteristic.CarbonDioxideLevel)
       .onGet(this.handleCarbonDioxideLevelGet.bind(this));
 
+    
+    // Air Quality Service ------------------------------------------------------------------------
+    this.airQualityService = new hap.Service.AirQualitySensor(this.name + " Air Quality Sensor");
+    this.airQualityService.getCharacteristic(hap.Characteristic.AirQuality)
+      .onGet(this.handleAirQualityGet.bind(this));
+    
+    this.airQualityService.getCharacteristic(hap.Characteristic.VOCDensity)
+      .onGet(this.handleVOCGet.bind(this));
 
     this.informationService = new hap.Service.AccessoryInformation()
       .setCharacteristic(hap.Characteristic.Manufacturer, "Custom Manufacturer")
@@ -120,6 +132,30 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.log.info('Triggered GET CarbonDioxideLevel');
     this.log.info("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
     return this.sensorData.eco2;
+  }
+
+  handleAirQualityGet() {
+    this.log.info('Triggered GET AirQuality');
+    this.log.info("Current state of the AirQuality sensor was returned: " + (this.sensorData.eco2));
+
+   if(this.sensorData.aqi == 1) {
+      return hap.Characteristic.AirQuality.EXCELLENT;
+    } else if(this.sensorData.aqi == 2) {
+      return hap.Characteristic.AirQuality.GOOD;
+    } else if(this.sensorData.aqi == 3) {
+      return hap.Characteristic.AirQuality.FAIR;
+    } else if(this.sensorData.aqi == 4) {
+      return hap.Characteristic.AirQuality.INFERIOR;
+    } else if(this.sensorData.aqi >= 5) {
+      return hap.Characteristic.AirQuality.POOR;
+    }
+    return hap.Characteristic.AirQuality.UNKNOWN;
+  }
+
+  handleVOCGet() {
+    this.log.info('Triggered GET VOCDensity');
+    this.log.info("Current state of the VOC sensor VOCDensity was returned: " + (this.sensorData.tvoc));
+    return this.sensorData.tvoc;
   }
 
 
@@ -178,6 +214,7 @@ class IndoorAirSensor implements AccessoryPlugin {
     return [
       this.informationService,
       this.co2Service,
+      this.airQualityService,
     ];
   }
 
