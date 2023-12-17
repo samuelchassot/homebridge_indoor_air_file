@@ -242,6 +242,8 @@ class IndoorAirSensor implements AccessoryPlugin {
       this.informationService,
       this.co2Service,
       this.airQualityService,
+      this.temperatureService,
+      this.humidityService,
     ];
   }
 
