@@ -111,8 +111,8 @@ class IndoorAirSensor implements AccessoryPlugin {
 
     // Information Service ------------------------------------------------------------------------
     this.informationService = new hap.Service.AccessoryInformation()
-      .setCharacteristic(hap.Characteristic.Manufacturer, "Custom Manufacturer")
-      .setCharacteristic(hap.Characteristic.Model, "Custom Model");
+      .setCharacteristic(hap.Characteristic.Manufacturer, "Samuel Inc.")
+      .setCharacteristic(hap.Characteristic.Model, "Indoor air sensor ref 109277492");
 
     
 
