@@ -11,11 +11,17 @@
         "required": true,
         "default": "Example Dynamic Platform"
       },
-      "file_path": {
-        "title": "url",
+      "url": {
+        "title": "Server URL",
         "type": "string",
         "required": true,
         "default": "http://localhost:8080/getData"
+      },
+      "pollingInterval": {
+        "title": "Polling Interval",
+        "type": "number",
+        "required": false,
+        "default": 10000
       }
     }
   }
