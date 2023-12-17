@@ -63,6 +63,8 @@ class IndoorAirSensor implements AccessoryPlugin {
 
   private readonly co2Service: Service;
   private readonly airQualityService: Service;
+  private readonly temperatureService: Service;
+  private readonly humidityService: Service;
   private readonly informationService: Service;
 
   constructor(log: Logging, config: AccessoryConfig, api: API) {
@@ -97,11 +99,24 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.airQualityService.getCharacteristic(hap.Characteristic.VOCDensity)
       .onGet(this.handleVOCGet.bind(this));
 
+    // Temperature Service ------------------------------------------------------------------------
+    this.temperatureService = new hap.Service.TemperatureSensor(this.name + " Temperature Sensor");
+    this.temperatureService.getCharacteristic(hap.Characteristic.CurrentTemperature)
+      .onGet(this.handleCurrentTemperatureGet.bind(this));
+
+    // Humidity Service ---------------------------------------------------------------------------
+    this.humidityService = new hap.Service.HumiditySensor(this.name + " Humidity Sensor");
+    this.humidityService.getCharacteristic(hap.Characteristic.CurrentRelativeHumidity)
+      .onGet(this.handleCurrentRelativeHumidityGet.bind(this));
+
+    // Information Service ------------------------------------------------------------------------
     this.informationService = new hap.Service.AccessoryInformation()
       .setCharacteristic(hap.Characteristic.Manufacturer, "Custom Manufacturer")
       .setCharacteristic(hap.Characteristic.Model, "Custom Model");
 
+    
 
+    // Polling ------------------------------------------------------------------------------------
 
       this.pollingInterval = config.pollingIntervalMS;
     this.log.info("Polling interval is " + this.pollingInterval + " ms");
@@ -156,6 +171,18 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.log.debug('Triggered GET VOCDensity');
     this.log.debug("Current state of the VOC sensor VOCDensity was returned: " + (this.sensorData.tvoc));
     return this.sensorData.tvoc;
+  }
+
+  handleCurrentTemperatureGet() {
+    this.log.debug('Triggered GET CurrentTemperature');
+    this.log.debug("Current state of the Temperature sensor CurrentTemperature was returned: " + (this.sensorData.temperature));
+    return this.sensorData.temperature;
+  }
+
+  handleCurrentRelativeHumidityGet() {
+    this.log.debug('Triggered GET CurrentRelativeHumidity');
+    this.log.debug("Current state of the Humidity sensor CurrentRelativeHumidity was returned: " + (this.sensorData.humidity));
+    return this.sensorData.humidity;
   }
 
 
