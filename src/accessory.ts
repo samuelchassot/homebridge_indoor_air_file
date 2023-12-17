@@ -109,7 +109,7 @@ class IndoorAirSensor implements AccessoryPlugin {
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideDetectedGet() {
-    this.log.debug('Triggered GET CarbonDioxideDetected');
+    this.log.info('Triggered GET CarbonDioxideDetected');
     this.log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.sensorData.eco2 <= 1000 ? "NORMAL" : "ABNORMAL"));
     return this.get_co2_detected();
   }
@@ -117,7 +117,7 @@ class IndoorAirSensor implements AccessoryPlugin {
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideLevelGet() {
-    this.log.debug('Triggered GET CarbonDioxideLevel');
+    this.log.info('Triggered GET CarbonDioxideLevel');
     this.log.info("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
     return this.sensorData.eco2;
   }
@@ -128,7 +128,7 @@ class IndoorAirSensor implements AccessoryPlugin {
   }
 
   update_from_http_request(callback: (error: Error | null, result: boolean) => void) {
-    this.log.debug('Triggered Update from HTTP Request, url = ' + this.url);
+    this.log.info('Triggered Update from HTTP Request, url = ' + this.url);
     try {
       let req = http.get(this.url, res => {
         let recv_data = '';
@@ -137,7 +137,7 @@ class IndoorAirSensor implements AccessoryPlugin {
           // recv_data contains volume info.
           let json_values: SensorData = JSON.parse(recv_data);
           this.sensorData = json_values;
-          this.log.debug("Updated sensor data: " + JSON.stringify(this.sensorData));
+          this.log.info("Updated sensor data: " + JSON.stringify(this.sensorData));
           callback(null, true);
         });
       });
@@ -159,7 +159,7 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.update_from_http_request((err, result) => {
       this.update_device_values();
     });
-    this.log.debug("Polling again in " + this.pollingInterval + " ms");
+    this.log.info("Polling again in " + this.pollingInterval + " ms");
     this.timer = setTimeout(this.poll.bind(this), this.pollingInterval)
   }
   /*
