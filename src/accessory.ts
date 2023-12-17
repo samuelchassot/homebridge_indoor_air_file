@@ -159,7 +159,7 @@ class IndoorAirSensor implements AccessoryPlugin {
     this.update_from_http_request((err, result) => {
       this.update_device_values();
     });
-
+    this.log.debug("Polling again in " + this.pollingInterval + " ms");
     this.timer = setTimeout(this.poll.bind(this), this.pollingInterval)
   }
   /*
