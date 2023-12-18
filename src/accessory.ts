@@ -201,7 +201,7 @@ class IndoorAirSensor implements AccessoryPlugin {
           // recv_data contains volume info.
           let json_values: SensorData = JSON.parse(recv_data);
           this.sensorData = json_values;
-          this.log.debug("Updated sensor data: " + JSON.stringify(this.sensorData));
+          this.log.info("Updated sensor data: " + JSON.stringify(this.sensorData));
           callback(null, true);
         });
       });
