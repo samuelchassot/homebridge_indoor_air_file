@@ -191,7 +191,8 @@ class IndoorAirSensor implements AccessoryPlugin {
   }
 
   update_from_http_request(callback: (error: Error | null, result: boolean) => void) {
-    this.log.debug('Triggered Update from HTTP Request, url = ' + this.url);
+    this.log.info('Triggered Update from HTTP Request, url = ' + this.url);
+
     try {
       let req = http.get(this.url, res => {
         let recv_data = '';
