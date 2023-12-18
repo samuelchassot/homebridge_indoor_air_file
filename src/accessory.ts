@@ -136,16 +136,16 @@ class IndoorAirSensor implements AccessoryPlugin {
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideDetectedGet() {
-    this.log.info('Triggered GET CarbonDioxideDetected');
-    this.log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.sensorData.eco2 <= 1000 ? "NORMAL" : "ABNORMAL"));
+    this.log.debug('Triggered GET CarbonDioxideDetected');
+    this.log.debug("Current state of the CO2 sensor CO2Detected was returned: " + (this.sensorData.eco2 <= 1000 ? "NORMAL" : "ABNORMAL"));
     return this.get_co2_detected();
   }
   /**
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideLevelGet() {
-    this.log.info('Triggered GET CarbonDioxideLevel');
-    this.log.info("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
+    this.log.debug('Triggered GET CarbonDioxideLevel');
+    this.log.debug("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
     return this.sensorData.eco2;
   }
 
@@ -191,7 +191,7 @@ class IndoorAirSensor implements AccessoryPlugin {
   }
 
   update_from_http_request(callback: (error: Error | null, result: boolean) => void) {
-    this.log.info('Triggered Update from HTTP Request, url = ' + this.url);
+    this.log.debug('Triggered Update from HTTP Request, url = ' + this.url);
 
     try {
       let req = http.get(this.url, res => {
@@ -201,7 +201,7 @@ class IndoorAirSensor implements AccessoryPlugin {
           // recv_data contains volume info.
           let json_values: SensorData = JSON.parse(recv_data);
           this.sensorData = json_values;
-          this.log.info("Updated sensor data: " + JSON.stringify(this.sensorData));
+          this.log.debug("Updated sensor data: " + JSON.stringify(this.sensorData));
           callback(null, true);
         });
       });
