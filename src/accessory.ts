@@ -136,16 +136,16 @@ class IndoorAirSensor implements AccessoryPlugin {
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideDetectedGet() {
-    this.log.debug('Triggered GET CarbonDioxideDetected');
-    this.log.debug("Current state of the CO2 sensor CO2Detected was returned: " + (this.sensorData.eco2 <= 1000 ? "NORMAL" : "ABNORMAL"));
+    this.log.info('Triggered GET CarbonDioxideDetected');
+    this.log.info("Current state of the CO2 sensor CO2Detected was returned: " + (this.sensorData.eco2 <= 1000 ? "NORMAL" : "ABNORMAL"));
     return this.get_co2_detected();
   }
   /**
    * Handle requests to get the current value of the "Carbon Dioxide Detected" characteristic
    */
   handleCarbonDioxideLevelGet() {
-    this.log.debug('Triggered GET CarbonDioxideLevel');
-    this.log.debug("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
+    this.log.info('Triggered GET CarbonDioxideLevel');
+    this.log.info("Current state of the CO2 sensor CO2Level was returned: " + (this.sensorData.eco2));
     return this.sensorData.eco2;
   }
 
