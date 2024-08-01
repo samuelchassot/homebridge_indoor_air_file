@@ -1,6 +1,6 @@
 {
   "pluginAlias": "HomebridgeIndoorAir",
-  "pluginType": "platform",
+  "pluginType": "accessory",
   "singular": true,
   "schema": {
     "type": "object",
