@@ -1,7 +1,7 @@
 {
   "private": true,
   "displayName": "Indoor Air Sensor",
-  "name": "homebridge-indoor-air-http",
+  "name": "@samuelchassot/homebridge-indoor-air-http",
   "version": "1.0.0",
   "description": "Shows different values for indoor air: CO2, VOC, Humidity, Temperature, Pressure",
   "main": "dist/accessory.js",
