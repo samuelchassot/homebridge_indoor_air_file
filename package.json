@@ -37,7 +37,6 @@
     "axios": "^1.6.2",
     "homebridge": "^1.8.1",
     "rimraf": "^5.0.0",
-    "typescript": "^5.0.4",
-    "homebridge": "^2.0.0-beta.0"
+    "typescript": "^5.0.4"
   }
 }
