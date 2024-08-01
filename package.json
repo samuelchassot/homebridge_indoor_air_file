@@ -1,17 +1,17 @@
 {
   "private": true,
-  "displayName": "Plugin Name",
-  "name": "homebridge-plugin-name",
+  "displayName": "Indoor Air Sensor HTTP Plugin",
+  "name": "homebridge-indoor-air-http",
   "version": "1.0.0",
-  "description": "A short description about what your plugin does.",
+  "description": "This plugin gets values of air quality from an HTTP server and displays them in HomeKit.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "git+https://github.com/samuelchassot/homebridge_indoor_air_file.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/samuelchassot/homebridge_indoor_air_file/issues"
   },
   "engines": {
     "node": "^18.20.4 || ^20.16.0 || ^22.5.1",
