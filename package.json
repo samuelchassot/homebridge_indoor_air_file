@@ -1,42 +1,41 @@
 {
   "private": true,
-  "displayName": "Indoor Air Sensor",
-  "name": "@samuelchassot/homebridge-indoor-air-http",
+  "displayName": "Plugin Name",
+  "name": "homebridge-plugin-name",
   "version": "1.0.0",
-  "description": "Shows different values for indoor air: CO2, VOC, Humidity, Temperature, Pressure",
-  "main": "dist/accessory.js",
-  "scripts": {
-    "clean": "rimraf ./dist",
-    "build": "rimraf ./dist && tsc",
-    "prepublishOnly": "npm run build",
-    "postpublish": "npm run clean",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "A short description about what your plugin does.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
   },
-  "author": "Samuel Chassot",
+  "bugs": {
+    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+  },
   "engines": {
     "node": "^18.20.4 || ^20.16.0 || ^22.5.1",
     "homebridge": "^1.8.0 || ^2.0.0-beta.0"
   },
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.ts --max-warnings=0",
+    "watch": "npm run build && npm link && nodemon",
+    "build": "rimraf ./dist && tsc",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
   "keywords": [
     "homebridge-plugin"
   ],
-  "license": "ISC",
-  "files": [
-    "LICENSE",
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/samuelchassot/homebridge_indoor_air_file/"
-  },
-  "bugs": {
-    "url": "https://github.com/samuelchassot/homebridge_indoor_air_file/issues"
-  },
   "devDependencies": {
-    "@types/node": "^22.0.2",
-    "axios": "^1.6.2",
-    "homebridge": "^1.8.1",
-    "rimraf": "^5.0.0",
-    "typescript": "^5.0.4"
+    "@types/node": "^20.14.12",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
+    "eslint": "^8.57.0",
+    "homebridge": "^2.0.0-beta.0",
+    "nodemon": "^3.1.4",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }

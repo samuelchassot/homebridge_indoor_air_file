@@ -1,6 +1,6 @@
 {
-  "pluginAlias": "HomebridgeIndoorAir",
-  "pluginType": "accessory",
+  "pluginAlias": "ExampleHomebridgePlugin",
+  "pluginType": "platform",
   "singular": true,
   "schema": {
     "type": "object",
@@ -10,18 +10,6 @@
         "type": "string",
         "required": true,
         "default": "Example Dynamic Platform"
-      },
-      "url": {
-        "title": "Server URL",
-        "type": "string",
-        "required": true,
-        "default": "http://localhost:8080/getData"
-      },
-      "pollingIntervalMS": {
-        "title": "Polling Interval",
-        "type": "number",
-        "required": false,
-        "default": 10000
       }
     }
   }
