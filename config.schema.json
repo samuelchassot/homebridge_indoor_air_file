@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "HttpSensorHomebridgePlugin",
+  "pluginAlias": "HomebridgeIndoorAirHttp",
   "pluginType": "platform",
   "singular": true,
   "schema": {
